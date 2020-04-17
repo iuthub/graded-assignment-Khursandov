@@ -66,7 +66,7 @@
             ul li a {
                 color: grey;
             }
-         
+
             /* Style the header */
             .header {
               background-color: #f44336;
@@ -114,7 +114,22 @@
         </style>
     </head>
     <body>
-        <form action="">
+    @yield('header')
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
+        {{ Auth::user() }}
+        <form action="{{route('')}}">
             <div id="myDIV" class="header">
               <h2>My To Do List</h2>
               <input type="text" name="newTask" placeholder="Title...">
@@ -130,7 +145,7 @@
                 <a href=""><i class="fa fa-edit"></i></a>
             </div>
             <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
+                <a href=""><i class="fa fa-trash-alt"></i></a>
             </div>
           </li>
           <li>
@@ -141,7 +156,7 @@
                 <a href=""><i class="fa fa-edit"></i></a>
             </div>
             <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
+                <a href=""><i class="fa fa-trash-alt"></i></a>
             </div>
           </li>
           <li>
@@ -152,7 +167,7 @@
                 <a href=""><i class="fa fa-edit"></i></a>
             </div>
             <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
+                <a href=""><i class="fa fa-trash-alt"></i></a>
             </div>
           </li>
         </ul>
